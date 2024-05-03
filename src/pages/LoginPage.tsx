@@ -9,6 +9,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   return (
@@ -36,7 +37,15 @@ const LoginPage = () => {
           </div>
         </CardContent>
         <CardFooter>
-          <Button className="w-full">Sign in</Button>
+          <div className="w-full">
+            <Button className="w-full">Login</Button>
+            <div className="mt-4 text-center text-sm">
+              Already have an account?{" "}
+              <Link to={"/signup"} className="underline">
+                Sign up
+              </Link>
+            </div>
+          </div>
         </CardFooter>
       </Card>
     </section>
