@@ -24,7 +24,7 @@ const LoginPage = () => {
   const mutation = useMutation({
     mutationFn: login,
     onSuccess: () => {
-      console.log("login success");
+      console.log("login successfully");
       navigate("/dashboard/home");
     },
   });
@@ -44,7 +44,7 @@ const LoginPage = () => {
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account. <br />
+            Enter your email below to login to your account <br />
             {mutation.isError && (
               <span className="text-red-500 text-sm">
                 {mutation.error.message}
