@@ -13,9 +13,12 @@ import { useRef } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { register } from "@/http/api";
 import { LoaderCircle } from "lucide-react";
+import useTokenStore from "@/store";
 
 const SignUpPage = () => {
   const navigate = useNavigate();
+  const setToken = useTokenStore((state) => state.setToken);
+
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -23,9 +26,10 @@ const SignUpPage = () => {
   // Mutations
   const mutation = useMutation({
     mutationFn: register,
-    onSuccess: () => {
-      console.log("Registered successfully");
-      navigate("/auth/login");
+    onSuccess: (response) => {
+      // console.log("Registered successfully");
+      setToken(response.data.accessToken);
+      navigate("/dashboard/home");
     },
   });
 
