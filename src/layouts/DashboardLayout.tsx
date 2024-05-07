@@ -22,11 +22,15 @@ import { Link, Navigate, Outlet } from "react-router-dom";
 import useTokenStore from "@/store";
 
 const DashboardLayout = () => {
-  const token = useTokenStore((state) => state.token);
+  const { token, setToken } = useTokenStore((state) => state);
 
   if (!token) {
     return <Navigate to={"/auth/login"} replace />;
   }
+
+  const handleLogout = () => {
+    setToken("");
+  };
 
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
@@ -129,7 +133,15 @@ const DashboardLayout = () => {
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem>Support</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
+              <DropdownMenuItem>
+                <Button
+                  onClick={handleLogout}
+                  className="w-full"
+                  variant={"destructive"}
+                >
+                  Logout
+                </Button>
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </header>
